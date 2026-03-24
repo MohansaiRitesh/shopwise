@@ -74,7 +74,7 @@ public class ProductService {
                 .map(Product::getCategory).distinct().sorted().collect(Collectors.toList());
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    // Helpers
 
     private Product findById(Long id) {
         return productRepository.findById(id)

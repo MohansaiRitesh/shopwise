@@ -50,7 +50,7 @@ public class UserService {
         return userRepository.findAll().stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    // ── Helpers ────────────────────────────────────────────────────────────────
+    // Helpers
 
     private User findByUsername(String username) {
         return userRepository.findByUsername(username)

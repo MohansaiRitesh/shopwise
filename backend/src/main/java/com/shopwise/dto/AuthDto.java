@@ -9,7 +9,7 @@ import lombok.Data;
  */
 public class AuthDto {
 
-    // ─── Request DTOs ────────────────────────────────────────────────────────
+    // Request DTOs
 
     @Data
     public static class LoginRequest {
@@ -38,7 +38,7 @@ public class AuthDto {
         private String fullName;
     }
 
-    // ─── Response DTOs ───────────────────────────────────────────────────────
+    // Response DTOs
 
     @Data
     public static class JwtResponse {
