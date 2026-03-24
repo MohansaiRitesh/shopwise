@@ -25,13 +25,13 @@ api.interceptors.response.use(
   }
 );
 
-// ── Auth ──────────────────────────────────────────────────────────────────────
+// Auth
 export const authApi = {
   login: (data) => api.post('/auth/login', data),
   register: (data) => api.post('/auth/register', data),
 };
 
-// ── Products ──────────────────────────────────────────────────────────────────
+// Products
 export const productApi = {
   getAll: (params) => api.get('/products', { params }),
   getById: (id) => api.get(`/products/${id}`),
@@ -44,7 +44,7 @@ export const productApi = {
   delete: (id) => api.delete(`/products/${id}`),
 };
 
-// ── Users ─────────────────────────────────────────────────────────────────────
+// Users
 export const userApi = {
   getProfile: () => api.get('/users/me'),
   updateProfile: (data) => api.put('/users/me', data),
