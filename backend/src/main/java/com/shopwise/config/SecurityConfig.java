@@ -24,7 +24,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Spring Security Configuration
@@ -87,10 +86,29 @@ public class SecurityConfig {
     /**
      * CORS configuration: allow requests from the React dev server.
      */
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of("http://localhost:3000"));
+//        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+//        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+//        config.setAllowCredentials(true);
+//        config.setMaxAge(3600L);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+
+        // Read frontend URL from environment variable (set on Render)
+        // Falls back to localhost for local development
+        String frontendUrl = System.getenv().getOrDefault("FRONTEND_URL", "http://localhost:3000");
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", frontendUrl));
+
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
         config.setAllowCredentials(true);
@@ -115,7 +133,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // Disable CSRF (we use stateless JWT, not cookies/sessions)
+            // Disable CSRF
             .csrf(csrf -> csrf.disable())
 
             // Enable CORS with our config above
@@ -127,7 +145,7 @@ public class SecurityConfig {
 
             // URL authorization rules
             .authorizeHttpRequests(auth -> auth
-                // H2 console (development only)
+                // H2 console
                 .requestMatchers("/h2-console/**").permitAll()
 
                 // Authentication endpoints — open to all
@@ -171,8 +189,8 @@ public class SecurityConfig {
             .addFilterBefore(authenticationJwtTokenFilter(),
                     UsernamePasswordAuthenticationFilter.class);
 
-        // Allow H2 console frames (development only)
-        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
+        // Allow H2 console frames
+//        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();
     }
