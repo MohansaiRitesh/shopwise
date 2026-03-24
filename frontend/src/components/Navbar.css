@@ -1,0 +1,97 @@
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10, 15, 30, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+}
+
+.navbar-inner {
+  height: 100%;
+  display: flex; align-items: center; gap: 20px;
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
+}
+.brand-icon { font-size: 24px; }
+.brand-name {
+  font-size: 18px; font-weight: 800;
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Search */
+.navbar-search {
+  flex: 1; max-width: 480px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0 12px;
+  transition: border-color 0.2s;
+}
+.navbar-search:focus-within { border-color: var(--accent); }
+.search-icon { font-size: 14px; color: var(--text-muted); flex-shrink: 0; }
+.search-input {
+  flex: 1; background: none; border: none;
+  color: var(--text-primary); font-family: var(--font); font-size: 14px;
+  padding: 9px 0; outline: none;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-clear {
+  background: none; border: none; color: var(--text-muted);
+  cursor: pointer; font-size: 12px; padding: 2px 4px;
+}
+.search-clear:hover { color: var(--text-primary); }
+
+/* Right */
+.navbar-right {
+  margin-left: auto; display: flex; align-items: center; gap: 12px;
+  position: relative;
+}
+
+.navbar-avatar-wrap {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; padding: 4px 8px; border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+.navbar-avatar-wrap:hover { background: var(--bg-card); }
+.navbar-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2px solid var(--border-light); object-fit: cover;
+}
+.navbar-username { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+/* Dropdown */
+.navbar-dropdown {
+  position: absolute; top: calc(100% + 12px); right: 0;
+  width: 240px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow-lg);
+  animation: fadeInUp 0.15s ease;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px;
+}
+.dropdown-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.dropdown-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.dropdown-role { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.dropdown-divider { height: 1px; background: var(--border); }
+
+.dropdown-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; color: var(--text-secondary);
+  font-size: 14px; font-weight: 500;
+  text-decoration: none; cursor: pointer;
+  border: none; background: none; width: 100%; text-align: left;
+  font-family: var(--font);
+  transition: background 0.15s, color 0.15s;
+}
+.dropdown-item:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.dropdown-logout { color: var(--danger); }
+.dropdown-logout:hover { background: rgba(239,68,68,0.1); color: var(--danger); }
