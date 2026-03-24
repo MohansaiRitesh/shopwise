@@ -25,7 +25,10 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const loginWithOAuth = useCallback((provider) => {
-    window.location.href = `http://localhost:8080/oauth2/authorize/${provider}?redirect_uri=http://localhost:3000/oauth2/callback`;
+    // Uses environment variable in production, falls back to localhost for dev
+    const apiBase = process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:8080';
+    const redirectUri = `${window.location.origin}/oauth2/callback`;
+    window.location.href = `${apiBase}/oauth2/authorize/${provider}?redirect_uri=${redirectUri}`;
   }, []);
 
   const handleOAuthCallback = useCallback((token, username, role) => {

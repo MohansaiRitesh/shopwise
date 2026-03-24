@@ -52,17 +52,13 @@
 //   getAllUsers: () => api.get('/users'),
 // };
 
-// export default api;
 
 import axios from 'axios';
 
-// Use environment variable
-const API_BASE = process.env.REACT_APP_API_URL + '/api';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 // Create axios instance
-const api = axios.create({
-  baseURL: API_BASE,
-});
+const api = axios.create({ baseURL: API_BASE });
 
 // Attach JWT to every request
 api.interceptors.request.use((config) => {
@@ -110,5 +106,3 @@ export const userApi = {
   changePassword: (data) => api.post('/users/me/password', data),
   getAllUsers: () => api.get('/users'),
 };
-
-export default api;
