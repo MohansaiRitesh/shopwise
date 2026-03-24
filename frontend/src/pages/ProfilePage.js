@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
-  const { user, isAdmin, refreshProfile } = useAuth();
+  const { isAdmin, refreshProfile } = useAuth();
   const navigate = useNavigate();
 
   const [profile, setProfile] = useState(null);

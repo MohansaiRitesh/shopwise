@@ -13,20 +13,34 @@ export default function OAuth2Callback() {
   const { handleOAuthCallback } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = params.get('token');
-    const username = params.get('username');
-    const role = params.get('role');
+  // useEffect(() => {
+  //   const token = params.get('token');
+  //   const username = params.get('username');
+  //   const role = params.get('role');
 
-    if (token) {
-      handleOAuthCallback(token, username, role);
-      toast.success(`Welcome, ${username}!`);
-      navigate('/dashboard', { replace: true });
-    } else {
-      toast.error('SSO login failed. Please try again.');
-      navigate('/login', { replace: true });
-    }
-  }, []);
+  //   if (token) {
+  //     handleOAuthCallback(token, username, role);
+  //     toast.success(`Welcome, ${username}!`);
+  //     navigate('/dashboard', { replace: true });
+  //   } else {
+  //     toast.error('SSO login failed. Please try again.');
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, []);
+  useEffect(() => {
+  const token = params.get('token');
+  const username = params.get('username');
+  const role = params.get('role');
+
+  if (token) {
+    handleOAuthCallback(token, username, role);
+    toast.success(`Welcome, ${username}!`);
+    navigate('/dashboard', { replace: true });
+  } else {
+    toast.error('SSO login failed. Please try again.');
+    navigate('/login', { replace: true });
+  }
+}, [params, handleOAuthCallback, navigate]);
 
   return (
     <div className="page-loader">

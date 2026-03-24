@@ -71,7 +71,11 @@ export default function DashboardPage() {
     }
   }, [page, selectedCategory, searchKeyword, sortBy, sortDir]);
 
-  useEffect(() => { fetchCategories(); fetchFeatured(); }, []);
+  // useEffect(() => { fetchCategories(); fetchFeatured(); }, []);
+  useEffect(() => {
+  fetchCategories();
+  fetchFeatured();
+}, [fetchCategories, fetchFeatured]);
   useEffect(() => { fetchProducts(); }, [fetchProducts]);
 
   // ── Handlers ─────────────────────────────────────────────────────────────────
